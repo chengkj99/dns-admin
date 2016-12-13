@@ -1,0 +1,19 @@
+h2{
+  span{
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .ip-handle-box{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+
+    span{
+      width: 15px;
+      height: 15px;
+      margin-left: 10px;
+    }
+
+  }
+}

@@ -1,12 +1,21 @@
 <!-- 客户接入层管理组件 -->
 
 <template>
-  <div>
-    <div><TitleTpl TitleName="客户接入层管理"></TitleTpl></div>
+  <div id="customer-access-node">
+    <div>
+      <h2>
+        客户接入层管理
+        <span>
+            <img @click="addCustomerAccessHandle" src="../assets/add.svg">
+          </span>
+      </h2>
+
+
+    </div>
+
   </div>
 </template>
 <script>
-import TitleTpl from './template/TitleTpl';
   export default {
     data () {
       return {
@@ -14,14 +23,21 @@ import TitleTpl from './template/TitleTpl';
       }
     },
     methods: {
+      addCustomerAccessHandle () {
 
+      },
     },
     components: {
-      TitleTpl
+
     }
   }
 
 </script>
 <style lang="scss">
+  #customer-access-node{
+    @import "../assets/css/title";
+
+
+  }
 
 </style>

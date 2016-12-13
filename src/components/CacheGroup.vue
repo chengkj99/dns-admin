@@ -4,7 +4,7 @@
 <template>
   <div>
     <div>
-      <TitleTpl TitleName="缓存组管理"></TitleTpl>
+      <CacheGroupTitle TitleName="缓存组管理"></CacheGroupTitle>
     </div>
     <div>
       <CacheListTable :listData="CacheGroupListData" :pageTotal="pageTotal"></CacheListTable>
@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import TitleTpl from './template/TitleTpl';
-import CacheListTable from './template/CacheListTable';
+import CacheGroupTitle from './template/CacheGroup/CacheGroupTitle';
+import CacheListTable from './template/CacheGroup/CacheListTable';
   export default {
     data () {
       return {
@@ -30,13 +30,15 @@ import CacheListTable from './template/CacheListTable';
 
     },
     components: {
-      TitleTpl,
+      CacheGroupTitle,
       CacheListTable
     },
     mounted () {
       this.$store.dispatch({
         type:'GET_CACHE_GROUP_DATA_AC',
-        amount:1
+        amount:{
+          page:1
+        }
       }).then((res) => {
          this.pageTotal=res.data.data.length;
       })
