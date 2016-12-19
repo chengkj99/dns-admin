@@ -3,124 +3,255 @@
 
     <div class="table-header">
       <h3>区域：全网默认
-        <span @click="addCacheGroupHandle">
-          <img src="../../../assets/add-record.svg">
+        <span>
+          <img
+            @click="addCacheGroupHandle"
+            src="../../../assets/add-record.svg">
         </span>
         <span>
-          <img src="../../../assets/edit.svg">
+          <img
+            data-view-type="default"
+            data-view="默认"
+            @click="updateDispatchPlatformHandle"
+            src="../../../assets/edit.svg">
         </span>
         <span>
-          <img src="../../../assets/details.svg">
+          <img
+            data-view-type="default"
+            data-view="默认"
+            @click="detailsDispatchPlatformHandle"
+            src="../../../assets/details.svg">
         </span>
       </h3>
     </div>
-    <el-table
-      :data="ListData"
-      border
-      style="width: 100%">
-      <el-table-column
-        inline-template
-        label="运营商区域"
-        >
-        <div>
-          <el-icon name="isp"></el-icon>
-          <span style="margin-left: 10px">{{ row.isp }}</span>
-        </div>
-      </el-table-column>
-      <el-table-column
-        inline-template
-        label="运营商区域"
-        >
-        <div>
-          <el-icon name="isp"></el-icon>
-          <span style="margin-left: 10px">{{ row.big_view_list }}</span>
-        </div>
-      </el-table-column>
-      <!--<el-table-column-->
-        <!--inline-template-->
-        <!--label="大区"-->
-        <!--&gt;-->
-        <!--<el-popover trigger="hover" placement="top">-->
-          <!--<p>姓名: {{ row.name }}</p>-->
-          <!--<p>住址: {{ row.address }}</p>-->
-          <!--<div slot="reference" class="name-wrapper">-->
-            <!--<el-tag>{{ row.name }}</el-tag>-->
-          <!--</div>-->
-        <!--</el-popover>-->
-      <!--</el-table-column>-->
-    </el-table>
+    <div class="table-box">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>运营商区域</th>
+          <th>大区</th>
+        </tr>
+        </thead>
+        <tbody v-for=" val in ListData">
+
+        <template v-if="val.isp=='移动'">
+          <tr v-if="val.isp=='移动'" v-for="(v,index) in val.big_view_list">
+            <td :rowspan="val.big_view_list.length" v-if="index==0">
+              移动
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="移动"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="移动"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+            <td>
+              <a
+                data-view-type="big_view"
+                :data-view="v"
+                @click="specificAreaHandle">{{v}}</a>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+          </tr>
+        </template>
+        <template v-if="val.isp=='联通'">
+          <tr v-if="val.isp=='联通'" v-for="(v,index) in val.big_view_list">
+            <td :rowspan="val.big_view_list.length" v-if="index==0">
+              联通
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="联通"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="联通"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+            <td>
+              <a
+                data-view-type="big_view"
+                :data-view="v"
+                @click="specificAreaHandle">{{v}}</a>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+          </tr>
+        </template>
+        <template v-if="val.isp=='电信'">
+          <tr v-if="val.isp=='电信'" v-for="(v,index) in val.big_view_list">
+            <td :rowSpan="val.big_view_list.length" v-if="index==0">
+              电信
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="联通"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="isp"
+                  data-view="电信"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+            <td>
+              <a
+                data-view-type="big_view"
+                :data-view="v"
+                @click="specificAreaHandle">{{v}}</a>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+              <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+            </td>
+          </tr>
+        </template>
+        </tbody>
+      </table>
+    </div>
 
 
+    <!-- 添加调度平台信息 -->
+    <AddDispatchPlatformTableRecord
+      :DialogFormVisibleAdd="DialogFormVisibleAdd"
+      :Schedule="Schedule"
+      :Domain="Domain"
+      v-on:ModalChangeAdd="addCacheGroupHandle"
+      v-on:ModalDataChange="getDispatchPlatformListData"
+    >
+    </AddDispatchPlatformTableRecord>
 
-    <el-dialog title="添加调度信息" v-model="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="调度平台"  :label-width="formLabelWidth">
-          <el-input v-model="form.scheduleName" placeholder="调度平台名称"></el-input>
-        </el-form-item>
-        <el-form-item label="域名" :label-width="formLabelWidth">
-          <el-select v-model="form.domainName"  placeholder="请选择域名">
-            <el-option :value="val.name" v-for ="val in DomainNameData">
-              <!--{{val}}-->
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择区域">
-            <el-option :label="val" :value="val+'-view'"  mark="view" v-for ="val in RegionNameData.view"></el-option>
-            <el-option :label="val" :value="val+'-big_view'"  mark="big_view" v-for ="val in RegionNameData.big_view"></el-option>
-            <el-option :label="val" :value="val+'-isp'"  mark="isp" v-for ="val in RegionNameData.isp"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="缓存组" :label-width="formLabelWidth">
-          <el-select v-model="form.cacheGroup"  placeholder="请选择缓存组">
-            <el-option :value="val.group_name.name" v-for=" val in CacheGroupNameData"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="权重"  :label-width="formLabelWidth">
-          <el-input v-model="form.weight" type="number" placeholder="权重"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="saveHandle">确 定</el-button>
-      </div>
-    </el-dialog>
+    <!-- 查看调度平台信息详情 -->
+    <template v-if="DialogFormVisibleDetails">
+      <DetailsDispatchPlatformTableRecord
+        :DialogFormVisibleDetails="DialogFormVisibleDetails"
+        :FormData="detailsForm"
+        v-on:ModalChangeDetails="detailsBeforeHandle"
+      >
+      </DetailsDispatchPlatformTableRecord>
+    </template>
+
+    <!-- 修改调度平台信息详情 -->
+    <template v-if="DialogFormVisibleUpdate">
+      <UpdateDispatchPlatformTableRecord
+        :DialogFormVisibleUpdate="DialogFormVisibleUpdate"
+        :FormData="detailsForm"
+        v-on:ModalChangeUpdate="updateBeforeHandle"
+      >
+      </UpdateDispatchPlatformTableRecord>
+    </template>
+
+    <!--  查询域名下view信息 -->
+    <template v-if="DialogFormVisibleSpecificArea">
+      <DetailsSpecificArea
+        :BigViewName="BigViewName"
+        :DialogFormVisibleSpecificArea="DialogFormVisibleSpecificArea"
+        :FormData="specificAreaForm"
+        v-on:ModalChangeSpecificArea="specificAreaBeforeHandle"
+      >
+      </DetailsSpecificArea>
+    </template>
+
 
   </div>
 
 </template>
 
 <script>
+  import AddDispatchPlatformTableRecord from './AddDispatchPlatformTableRecord'
+  import DetailsDispatchPlatformTableRecord from './DetailsDispatchPlatformTableRecord'
+  import UpdateDispatchPlatformTableRecord from './UpdateDispatchPlatformTableRecord'
+  import DetailsSpecificArea from './DetailsSpecificArea'
   export default {
-    props:['ListData'],
+    props:['Schedule','Domain'],
+    components: {
+      AddDispatchPlatformTableRecord,
+      DetailsDispatchPlatformTableRecord,
+      UpdateDispatchPlatformTableRecord,
+      DetailsSpecificArea
+    },
     data() {
       return {
-        dialogFormVisible:false,
-        form: {
-          scheduleName: '',
-          domainName: '',
-          viewType:'',
-          region:'',
-          cacheGroup:'',
-          weight:''
+        DialogFormVisibleAdd:false,
+        DialogFormVisibleDetails:false,
+        DialogFormVisibleUpdate:false,
+        DialogFormVisibleSpecificArea:false,
+
+        ListData:[],
+
+        detailsForm:{
+          schedule:this.Schedule,
+          domain:this.Domain,
+          view:'',
+          view_type:'',
         },
-        DomainNameData:this.$store.state.DomainNameData,
-        RegionNameData:this.$store.state.RegionNameData,
-        CacheGroupNameData:this.$store.CacheGroupNameData,
-        formLabelWidth: '120px'
+
+        specificAreaForm:{
+          schedule:this.Schedule,
+          domain:this.Domain,
+          view:'',
+          view_type:'',
+        },
+
       }
     },
     computed:{
-      DomainNameData () {
-        return this.$store.state.DomainNameData
-      },
-      RegionNameData () {
-        return this.$store.state.RegionNameData
-      },
-      CacheGroupNameData () {
-        return this.$store.state.CacheGroupNameData
-      }
-      },
+    },
+    mounted () {
+      this.getDispatchPlatformListData();
+
+    },
     methods: {
       handleEdit(index, row) {
         console.log(index, row);
@@ -128,36 +259,162 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
+      //添加全网默认信息弹窗显示
       addCacheGroupHandle () {
-          this.dialogFormVisible=true;
+        console.log('this.DialogFormVisibleAdd::',this.DialogFormVisibleAdd)
+        if(this.DialogFormVisibleAdd==true){
+          this.DialogFormVisibleAdd=false;
+        }else{
+          this.DialogFormVisibleAdd=true;
+        }
       },
-      saveHandle () {
+      // 详情预操作
+      detailsBeforeHandle () {
+         if(this.DialogFormVisibleDetails==true){
+           this.DialogFormVisibleDetails=false
+         }else{
+           this.DialogFormVisibleDetails=true
+         }
+      },
+       // 修改预操作
+       updateBeforeHandle () {
+         if(this.DialogFormVisibleUpdate==true){
+           this.DialogFormVisibleUpdate=false
+         }else{
+           this.DialogFormVisibleUpdate=true
+         }
+      },
+      //查看详情
+      detailsDispatchPlatformHandle (e) {
+          let _this=e.target;
+          this.detailsForm.view_type=_this.dataset.viewType;
+          this.detailsForm.view=_this.dataset.view;
+
+          this.detailsBeforeHandle();
+      },
+      //查看修改
+      updateDispatchPlatformHandle (e) {
+          let _this=e.target;
+          this.detailsForm.view_type=_this.dataset.viewType;
+          this.detailsForm.view=_this.dataset.view;
+
+          this.updateBeforeHandle();
+      },
+      //添加全网默认信息弹窗显示
+      getDispatchPlatformListData () {
         this.$store.dispatch({
-          type:'ADD_DISPATCH_PLATFORM_AC',
+          type:'GET_DISPATCH_PLATFORM_DATA_AC',
           amount:{
-           "schedule_name":this.form.scheduleName,
-           "domain":this.form.domainName,
-           "view":this.form.region.split('-')[0],
-           "view_type":this.form.region.split('-')[1],
-           "group_name":this.form.cacheGroup,
-           "weight":this.form.weight
+            "schedule":this.Schedule,
+            "domain":this.Domain,
           }
         }).then( (res) => {
-          this.dialogFormVisible=false;
-          this.$message({
-             message: '恭喜你，添加成功',
-             type: 'success'
-          });
-        },(res) => {
-          this.$message.error(res.data.error);
+            this.ListData=res.data.data;
         })
+      },
+      //查看大区下的区域信息预操作
+      specificAreaBeforeHandle () {
+        if(this.DialogFormVisibleSpecificArea==true){
+          this.DialogFormVisibleSpecificArea=false
+        }else{
+          this.DialogFormVisibleSpecificArea=true
         }
+      },
+      //添加全网默认信息弹窗显示
+      specificAreaHandle (e) {
+        let _this=e.target;
+        this.specificAreaForm.view_type=_this.dataset.viewType;
+        this.specificAreaForm.view=_this.dataset.view;
+
+        this.BigViewName=_this.dataset.view;
+
+        this.specificAreaBeforeHandle();
+
+      },
+
     }
   }
 </script>
 
 <style lang="scss">
   #dispatch-platform-node{
+
+    .img{
+      span{
+        display: inline-block;
+        cursor: pointer;
+        img{
+          display: inline-block;
+          vertical-align: sub;
+          width: 20px;
+          height: auto;
+          margin-left: 15px;
+        }
+      }
+    }
+
+    .table-box{
+      width: 100%;
+      position: relative;
+      display: block;
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table, th, td {
+        border: 1px solid #e0e6ed;
+      }
+      .table{
+
+        thead{
+
+          tr{
+            background-color: #e0e6ed;
+
+            th{
+              text-align: left;
+              padding: 0px 18px 0px 18px ;
+              box-sizing: border-box;
+              line-height: 40px;
+              height: 40px;
+              border-right: 1px solid #ddd;
+
+              @extend .img;
+            }
+          }
+        }
+        tbody{
+
+          tr{
+
+            td{
+              text-align: left;
+              line-height: 35px;
+              height: 35px;
+              box-sizing: border-box;
+              padding: 0px 18px 0px 18px;
+              font-size: 15px;
+
+              @extend .img;
+
+              >a{
+                color:#20a0ff;
+                font-size: 14px;
+                cursor: pointer;
+                &:hover{
+                  color:#4db3ff;
+                }
+                &:active{
+                  color:#1d90e6;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     .table-header{
 
       h3{
@@ -166,24 +423,12 @@
         margin: 10px 0px;
         line-height: 50px;
         height: 50px;
-        font-size: 1.23em;
+        font-size: 16px;
 
-        span{
-          display: inline-block;
+        @extend .img;
 
-          img{
-            display: inline-block;
-            vertical-align: sub;
-            width: 25px;
-            height: auto;
-            margin-left: 15px;
-
-
-          }
-        }
       }
     }
-
 
   }
 

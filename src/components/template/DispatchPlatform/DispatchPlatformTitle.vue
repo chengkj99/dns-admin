@@ -7,16 +7,39 @@
           </span>
         </h2>
 
-
-
       <!-- 添加调度平台信息-->
-
+      <el-dialog title="添加调度平台域名信息" v-model="dialogFormVisible">
+        <el-form :model="form">
+          <el-form-item label="调度平台"  :label-width="formLabelWidth">
+            <el-input v-model="form.scheduleName" placeholder="调度平台名称"></el-input>
+          </el-form-item>
+          <el-form-item label="域名" :label-width="formLabelWidth">
+            <el-select v-model="form.domainName"  placeholder="请选择域名">
+              <el-option :value="val.name" v-for ="val in DomainNameData">
+                <!--{{val}}-->
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="saveHandle">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
 </template>
 
 <style lang="scss">
   #title-node{
-    @import "../../../assets/css/title";
+    @import "../../../assets/css/main";
+    h2 {
+      span{
+        cursor: pointer;
+        img{
+          cursor: inherit;
+        }
+      }
+    }
 
   }
 </style>
@@ -32,48 +55,31 @@ import ipsCheck from '../../../assets/js/ipsCheck.js'
 
           form: {
             scheduleName: '',
-            domainName: '',
-            viewType:'',
-            region:'',
-            cacheGroup:'',
-            weight:''
+            domainName:'',
+
+            DomainNameData:this.$store.state.DomainNameData
           },
-          DomainNameData:this.$store.state.DomainNameData,
-          RegionNameData:this.$store.state.RegionNameData,
-          CacheGroupNameData:this.$store.CacheGroupNameData,
+
           formLabelWidth: '120px'
-          }
+        }
       },
       computed:{
         DomainNameData () {
           return this.$store.state.DomainNameData
-        },
-        RegionNameData () {
-          return this.$store.state.RegionNameData
-        },
-        CacheGroupNameData () {
-          return this.$store.state.CacheGroupNameData
         }
       },
       methods:{
         addCacheGroupHandle () {
           this.dialogFormVisible=true;
         },
-        getViewType (val) {
-          console.log('val',val)
-          this.viewType=val;
-        },
+
         saveHandle () {
 
           this.$store.dispatch({
-            type:'ADD_DISPATCH_PLATFORM_AC',
+            type:'ADD_SCHEDULE_LIST_AC',
             amount:{
-             "schedule_name":this.form.scheduleName,
+             "schedule":this.form.scheduleName,
              "domain":this.form.domainName,
-             "view":this.form.region.split('-')[0],
-             "view_type":this.form.region.split('-')[1],
-             "group_name":this.form.cacheGroup,
-             "weight":this.form.weight
             }
           }).then( (res) => {
             this.dialogFormVisible=false;

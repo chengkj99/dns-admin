@@ -21,7 +21,12 @@
         width="120">
         <div>
           <el-icon name="status"></el-icon>
-          <span style="margin-left: 10px">{{ row.group_name.status }}</span>
+          <template v-if="row.group_name.status=='enable'">
+            <span class="font-success">在线</span>
+          </template>
+          <template v-else>
+            <span class="font-warning">已下线</span>
+          </template>
         </div>
       </el-table-column>
 
@@ -36,7 +41,7 @@
             class="ip-group"
             v-for="(val,index) in row.ip_info"
             :closable="delStates==$index ? true :false"
-            :type="primary"
+            type="primary"
             :key="tag"
             :close-transition="false"
             @close="tagCloseHandle($index,index,row)"
@@ -80,7 +85,6 @@
           </el-button>
           <el-button
             size="small"
-            type="danger"
             :context="_self"
             @click="handleDeleteCacheGroup($index, row)">
             删除
@@ -149,7 +153,7 @@
 <script>
 import ipsCheck from '../../../assets/js/ipsCheck.js'
   export default {
-    props:['listData','pageTotal'],
+    props:['listData'],
     data() {
       return {
         currentPage1: 5,
@@ -167,16 +171,16 @@ import ipsCheck from '../../../assets/js/ipsCheck.js'
         },
 
         formLabelWidth: '120px',
-      }
-    },
-    filters: {
-      nameFilter (val) {
-        return 'reeee';
+
+        pageTotal:0
       }
     },
     computed:{
       CacheGroupCoverDataList () {
         return this.$store.state.CacheGroupCoverDataList;
+      },
+      pageTotal () {
+        return this.listData.length
       }
     },
     mounted () {

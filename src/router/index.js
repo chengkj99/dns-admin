@@ -18,7 +18,7 @@ const routes = [
 
   {
     path: '/',
-    component: Hello
+    component: CustomerAccess
   },
   {
     path: '/test',

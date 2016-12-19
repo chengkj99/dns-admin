@@ -29,7 +29,7 @@
 
 <style lang="scss">
   #title-node{
-    @import "../../../assets/css/title";
+    @import "../../../assets/css/main";
 
   }
 </style>

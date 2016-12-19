@@ -14,6 +14,7 @@
     margin: auto;
     display: block;
     position: relative;
+    padding-bottom: 50px;
   }
 </style>
 

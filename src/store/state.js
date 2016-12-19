@@ -3,7 +3,7 @@
  */
 
 
-
+//缓存组列表
 const CacheGroupListData={
 
   "code": 200,
@@ -97,19 +97,27 @@ const CacheGroupCoverDataList= [
   }
 ]
 
-const DispatchPlatformListData=[]
+const CustomerAccessListData=[]
 
 const RegionNameData=[]
 const DomainNameData=[]
 const CacheGroupNameData=[]
 
+const ScheduleListData=[]
+
+// 获取域名区域覆盖详情（暂时未用）
+const ScheduleListDataDetails={}
+
 const State = {
   CacheGroupListData:CacheGroupListData,
   CacheGroupCoverDataList:CacheGroupCoverDataList,
-  DispatchPlatformListData:DispatchPlatformListData,
   DomainNameData:DomainNameData,
   RegionNameData:RegionNameData,
-  CacheGroupNameData:CacheGroupNameData
+  CacheGroupNameData:CacheGroupNameData,
+
+  ScheduleListData:ScheduleListData,
+  ScheduleListDataDetails:ScheduleListDataDetails,
+  CustomerAccessListData:CustomerAccessListData
 
 }
 export default State

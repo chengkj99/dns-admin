@@ -3,23 +3,19 @@
   <div id="dispatch-platform-node">
       <div>
         <div>
-          <DispatchPlatformTitle TitleName="调度平台管理" ListData="DispatchPlatformListData">
-          </DispatchPlatformTitle>
+          <DispatchPlatformTitle TitleName="调度平台管理"></DispatchPlatformTitle>
         </div>
-
-        <el-tabs type="border-card" class="table-switch" >
-          <el-tab-pane label="v2.v2.v2.tabletabletable">
-            <DispatchListTable></DispatchListTable>
-          </el-tab-pane>
-          <el-tab-pane label="v2.v2.v2.tabletabletable">
-            <DispatchListTable></DispatchListTable>
-          </el-tab-pane>
-
-        </el-tabs>
-
+        <template v-if="componentStart" v-for="val in ScheduleListData">
+          <el-tabs type="border-card" class="table-switch" >
+            <el-tab-pane name="1" :label="val.name+'.'+val.domain_name">
+              <DispatchListTable
+                :Schedule="val.name"
+                :Domain="val.domain_name">
+              </DispatchListTable>
+            </el-tab-pane>
+          </el-tabs>
+        </template>
       </div>
-
-
   </div>
 </template>
 <script>
@@ -29,36 +25,30 @@ import DispatchListTable from './template/DispatchPlatform/DispatchListTable'
   export default {
     data () {
       return {
-        schedule:'all.lv2',
-        domain:'lxb.club',
-        view:'默认',
-        view_type:'default',
-
-        DispatchPlatformListData:this.$store.state.DispatchPlatformListData,
-
+        componentStart:false,
+        //调度域名列表
+        ScheduleListData:this.$store.state.ScheduleListData,
       }
     },
     computed:{
-      DispatchPlatformListData () {
-        return this.$store.state.DispatchPlatformListData
-      }
+      ScheduleListData () {
+        return this.$store.state.ScheduleListData
+      },
     },
-    methods: {
-      addCacheGroupHandle () {
-
-      }
+    beforeCreate () {
+      this.$store.dispatch('GET_SCHEDULE_LIST_DATA_AC').then(
+        () => {
+          this.componentStart=true
+        }
+      )
     },
     mounted () {
-      this.$store.dispatch({
-        type:'GET_DISPATCH_PLATFORM_DATA_AC',
-        amount:{
-          schedule:'all.lv2',
-          domain:'lxb.club',
-        }
-      })
       this.$store.dispatch('GET_IP_NAME_DATA_AC')
       this.$store.dispatch('GET_REGION_NAME_DATA_AC')
       this.$store.dispatch('GET_CACHE_GROUP_NAME_DATA_AC')
+    },
+    methods: {
+
     },
     components: {
       DispatchPlatformTitle,
@@ -69,11 +59,17 @@ import DispatchListTable from './template/DispatchPlatform/DispatchListTable'
 </script>
 <style lang="scss">
   #dispatch-platform-node{
-    @import "../assets/css/title";
+    @import "../assets/css/main";
 
 
     .table-switch{
       width: 100%;
+      margin-bottom: 40px;
+
+      .el-tabs__item{
+        min-width: 300px;
+        font-size: 18px;
+      }
     }
 
   }

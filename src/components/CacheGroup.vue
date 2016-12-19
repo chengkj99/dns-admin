@@ -7,7 +7,7 @@
       <CacheGroupTitle TitleName="缓存组管理"></CacheGroupTitle>
     </div>
     <div>
-      <CacheListTable :listData="CacheGroupListData" :pageTotal="pageTotal"></CacheListTable>
+      <CacheListTable :listData="CacheGroupListData"></CacheListTable>
     </div>
   </div>
 </template>
@@ -39,13 +39,12 @@ import CacheListTable from './template/CacheGroup/CacheListTable';
         amount:{
           page:1
         }
-      }).then((res) => {
-         this.pageTotal=res.data.data.length;
       })
     }
   }
 
 </script>
 <style lang="scss">
+  @import "../assets/css/main";
 
 </style>

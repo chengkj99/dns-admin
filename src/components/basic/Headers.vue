@@ -4,8 +4,13 @@
 <template>
   <div id='header-node' class='hero-head'>
     <div class="container">
-      <el-menu theme="dark" router default-active="1" class="el-menu-demo el-menu-reset" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="/CustomerAccess">
+      <el-menu theme="dark"
+               default-active="/CustomerAccess"
+               router
+               class="el-menu-demo el-menu-reset"
+               mode="horizontal"
+               @select="handleSelect">
+        <el-menu-item   index="/CustomerAccess">
           客户接入层管理
         </el-menu-item>
         <!--<el-submenu index="/DispatchPlatform">-->
@@ -50,7 +55,7 @@
 
 <style lang="scss">
 
-  @import '../../assets/css/color.scss';
+  @import '../../assets/css/main';
   #header-node{
 
     width: 100%;
