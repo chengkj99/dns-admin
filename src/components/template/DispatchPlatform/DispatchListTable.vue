@@ -25,138 +25,160 @@
       </h3>
     </div>
     <div class="table-box">
-      <table class="table">
+      <table v-if="ListData.length!=0" class="table">
         <thead>
         <tr>
           <th>运营商区域</th>
           <th>大区</th>
         </tr>
         </thead>
-        <tbody v-for=" val in ListData">
+        <tbody >
+        <template   v-for=" val in ListData" >
+          <template v-if="val.isp=='移动'">
+            <tr v-if="val.isp=='移动'" v-for="(v,index) in val.big_view_list">
+              <td :rowspan="val.big_view_list.length" v-if="index==0">
+                移动
+                <span>
+                <img
+                  data-view-type="isp"
+                  data-view="移动"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+                <span>
+                <img
+                  data-view-type="isp"
+                  data-view="移动"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+              </td>
+              <td>
+                <a
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="specificAreaHandle">{{v}}</a>
+                <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="updateDispatchPlatformHandle"
+                  src="../../../assets/edit.svg">
+              </span>
+                <span>
+                <img
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="detailsDispatchPlatformHandle"
+                  src="../../../assets/details.svg">
+              </span>
+              </td>
+            </tr>
+          </template>
 
-        <template v-if="val.isp=='移动'">
-          <tr v-if="val.isp=='移动'" v-for="(v,index) in val.big_view_list">
-            <td :rowspan="val.big_view_list.length" v-if="index==0">
-              移动
-              <span>
-                <img
-                  data-view-type="isp"
-                  data-view="移动"
-                  @click="updateDispatchPlatformHandle"
-                  src="../../../assets/edit.svg">
-              </span>
-              <span>
-                <img
-                  data-view-type="isp"
-                  data-view="移动"
-                  @click="detailsDispatchPlatformHandle"
-                  src="../../../assets/details.svg">
-              </span>
-            </td>
-            <td>
-              <a
-                data-view-type="big_view"
-                :data-view="v"
-                @click="specificAreaHandle">{{v}}</a>
-              <span>
-                <img
-                  data-view-type="big_view"
-                  :data-view="v"
-                  @click="updateDispatchPlatformHandle"
-                  src="../../../assets/edit.svg">
-              </span>
-              <span>
-                <img
-                  data-view-type="big_view"
-                  :data-view="v"
-                  @click="detailsDispatchPlatformHandle"
-                  src="../../../assets/details.svg">
-              </span>
-            </td>
-          </tr>
-        </template>
-        <template v-if="val.isp=='联通'">
-          <tr v-if="val.isp=='联通'" v-for="(v,index) in val.big_view_list">
-            <td :rowspan="val.big_view_list.length" v-if="index==0">
-              联通
-              <span>
+          <template v-if="val.isp=='联通'">
+            <tr v-if="val.isp=='联通'" v-for="(v,index) in val.big_view_list">
+              <td :rowspan="val.big_view_list.length" v-if="index==0">
+                联通
+                <span>
                 <img
                   data-view-type="isp"
                   data-view="联通"
                   @click="updateDispatchPlatformHandle"
                   src="../../../assets/edit.svg">
               </span>
-              <span>
+                <span>
                 <img
                   data-view-type="isp"
                   data-view="联通"
                   @click="detailsDispatchPlatformHandle"
                   src="../../../assets/details.svg">
               </span>
-            </td>
-            <td>
-              <a
-                data-view-type="big_view"
-                :data-view="v"
-                @click="specificAreaHandle">{{v}}</a>
-              <span>
+              </td>
+              <td>
+                <a
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="specificAreaHandle">{{v}}</a>
+                <span>
                 <img
                   data-view-type="big_view"
                   :data-view="v"
                   @click="updateDispatchPlatformHandle"
                   src="../../../assets/edit.svg">
               </span>
-              <span>
+                <span>
                 <img
                   data-view-type="big_view"
                   :data-view="v"
                   @click="detailsDispatchPlatformHandle"
                   src="../../../assets/details.svg">
               </span>
-            </td>
-          </tr>
-        </template>
-        <template v-if="val.isp=='电信'">
-          <tr v-if="val.isp=='电信'" v-for="(v,index) in val.big_view_list">
-            <td :rowSpan="val.big_view_list.length" v-if="index==0">
-              电信
-              <span>
+              </td>
+            </tr>
+          </template>
+
+          <template v-if="val.isp=='电信'">
+            <tr v-if="val.isp=='电信'" v-for="(v,index) in val.big_view_list">
+              <td :rowSpan="val.big_view_list.length" v-if="index==0">
+                电信
+                <span>
                 <img
                   data-view-type="isp"
                   data-view="联通"
                   @click="updateDispatchPlatformHandle"
                   src="../../../assets/edit.svg">
               </span>
-              <span>
+                <span>
                 <img
                   data-view-type="isp"
                   data-view="电信"
                   @click="detailsDispatchPlatformHandle"
                   src="../../../assets/details.svg">
               </span>
-            </td>
-            <td>
-              <a
-                data-view-type="big_view"
-                :data-view="v"
-                @click="specificAreaHandle">{{v}}</a>
-              <span>
+              </td>
+              <td>
+                <a
+                  data-view-type="big_view"
+                  :data-view="v"
+                  @click="specificAreaHandle">{{v}}</a>
+                <span>
                 <img
                   data-view-type="big_view"
                   :data-view="v"
                   @click="updateDispatchPlatformHandle"
                   src="../../../assets/edit.svg">
               </span>
-              <span>
+                <span>
                 <img
                   data-view-type="big_view"
                   :data-view="v"
                   @click="detailsDispatchPlatformHandle"
                   src="../../../assets/details.svg">
               </span>
+              </td>
+            </tr>
+          </template>
+
+        </template>
+
+        </tbody>
+      </table>
+      <table  v-else class="table">
+        <thead>
+        <tr>
+          <th>运营商区域</th>
+          <th>大区</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2"
+                style="height:80px;line-height:80px;text-align:center"
+            >
+              暂无数据
             </td>
           </tr>
-        </template>
         </tbody>
       </table>
     </div>

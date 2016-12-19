@@ -76,6 +76,25 @@
           </template>
           </tbody>
         </table>
+        <!--<table  v-else class="table">-->
+          <!--<thead>-->
+          <!--<tr>-->
+            <!--<th>运营商区域</th>-->
+            <!--<th>大区</th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<td colspan="2"-->
+                <!--style="height:80px;line-height:80px;text-align:center"-->
+            <!--&gt;-->
+              <!--暂无数据-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</table>-->
+
+
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelHandle">取 消</el-button>

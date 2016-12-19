@@ -20,7 +20,7 @@ const actions= {
     console.log('payload.amount::' + payload.amount)
 
     return new Promise((reslove, reject) => {
-      Vue.http.get('/api/v1/group/list', {
+      Vue.http.get('/v1/group/list', {
         params: payload.amount
       })
         .then(
@@ -44,7 +44,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/create
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/group/create', payload.amount)
+      Vue.http.post('/v1/group/create', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -67,7 +67,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/create
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/group/delete', payload.amount)
+      Vue.http.post('/v1/group/delete', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -90,7 +90,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/offline
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/group/online', payload.amount)
+      Vue.http.post('/v1/group/online', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -112,7 +112,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/offline
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/group/offline', payload.amount)
+      Vue.http.post('/v1/group/offline', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -135,7 +135,7 @@ const actions= {
     //GET /v1/group/cover/info?group_name=xxxx
     console.log(payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/group/cover/info', {params: payload.amount})
+      Vue.http.get('/v1/group/cover/info', {params: payload.amount})
         .then(
           (res) => {
             console.log('res.data::', res.data)
@@ -159,7 +159,7 @@ const actions= {
     console.log('payload.amount::', payload.amount)
 
     return new Promise((reslove, reject) => {
-      Vue.http.post('/api/v1/group/add/ip', payload.amount)
+      Vue.http.post('/v1/group/add/ip', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -180,7 +180,7 @@ const actions= {
 
     //POST /v1/group/delete/ip
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/group/delete/ip', payload.amount)
+      Vue.http.post('/v1/group/delete/ip', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -207,7 +207,7 @@ const actions= {
 
     console.log('payload.amount::' + payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/schedule/isp/view', {
+      Vue.http.get('/v1/schedule/isp/view', {
         params: payload.amount
       })
         .then(
@@ -225,7 +225,7 @@ const actions= {
   GET_SCHEDULE_LIST_DATA_AC ({commit}, payload){
 
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/schedule/list?page=1')
+      Vue.http.get('/v1/schedule/list?page=1')
         .then(
           (res) => {
             commit({
@@ -246,7 +246,7 @@ const actions= {
   ADD_DISPATCH_PLATFORM_AC ({commit}, payload) {
     console.log('payload.amount::' + payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/add/group', payload.amount)
+      Vue.http.post('/v1/schedule/add/group', payload.amount)
         .then(
           (res) => {
             console.log(res)
@@ -264,7 +264,7 @@ const actions= {
   ADD_SCHEDULE_LIST_AC ({commit}, payload) {
     console.log('payload.amount::' + payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/create', payload.amount)
+      Vue.http.post('/v1/schedule/create', payload.amount)
         .then(
           (res) => {
             store.dispatch('GET_SCHEDULE_LIST_DATA_AC')
@@ -284,7 +284,7 @@ const actions= {
   GET_IP_NAME_DATA_AC ({commit}){
 
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/domain/list')
+      Vue.http.get('/v1/domain/list')
         .then(
           (res) => {
             commit({
@@ -304,7 +304,7 @@ const actions= {
   GET_REGION_NAME_DATA_AC ({commit}, payload){
 
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/view/list')
+      Vue.http.get('/v1/view/list')
         .then(
           (res) => {
             commit({
@@ -324,7 +324,7 @@ const actions= {
   GET_CACHE_GROUP_NAME_DATA_AC ({commit}, payload){
 
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/group/list?page=1')
+      Vue.http.get('/v1/group/list?page=1')
         .then(
           (res) => {
             commit({
@@ -345,7 +345,7 @@ const actions= {
 ///v1/schedule/view/info?schedule=all.lv2&domain=lxb.club&view=默认&view_type=default
     console.log('payload.amount', payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/schedule/view/info?page=1', {params: payload.amount})
+      Vue.http.get('/v1/schedule/view/info?page=1', {params: payload.amount})
         .then(
           (res) => {
             commit({
@@ -367,7 +367,7 @@ const actions= {
     //POST /v1/schedule/view/fix/weight
     console.log('payload.amount', payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/view/fix/weight', payload.amount)
+      Vue.http.post('/v1/schedule/view/fix/weight', payload.amount)
         .then(
           (res) => {
             resolve(res)
@@ -384,7 +384,7 @@ const actions= {
     //POST /v1/schedule/delete/group
     console.log('payload.amount', payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/delete/group', payload.amount)
+      Vue.http.post('/v1/schedule/delete/group', payload.amount)
         .then(
           (res) => {
             resolve(res)
@@ -401,7 +401,7 @@ const actions= {
     //GET /v1/schedule/view?schedule=all.lv2&domain=lxb.club&view=华北联通&view_typ=big_view
     console.log('payload.amount', payload.amount)
     return new Promise((resolve, reject) => {
-      Vue.http.get('/api/v1/schedule/view', {params: payload.amount})
+      Vue.http.get('/v1/schedule/view', {params: payload.amount})
         .then(
           (res) => {
             resolve(res)
@@ -421,7 +421,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/schedule/delete/group
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/delete/group', payload.amount)
+      Vue.http.post('/v1/schedule/delete/group', payload.amount)
         .then(
           (res) => {
             // store.dispatch({
@@ -444,7 +444,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/offline
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/group/online', payload.amount)
+      Vue.http.post('/v1/schedule/group/online', payload.amount)
         .then(
           (res) => {
             // store.dispatch({
@@ -466,7 +466,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/group/offline
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/group/offline', payload.amount)
+      Vue.http.post('/v1/schedule/group/offline', payload.amount)
         .then(
           (res) => {
             // store.dispatch({
@@ -488,7 +488,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/schedule/fix/borrowed/weight
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/fix/borrowed/weight', payload.amount)
+      Vue.http.post('/v1/schedule/fix/borrowed/weight', payload.amount)
         .then(
           (res) => {
             // store.dispatch({
@@ -508,7 +508,7 @@ const actions= {
     console.log(payload.amount)
     //POST /v1/schedule/view/fix/weight
     return new Promise((resolve, reject) => {
-      Vue.http.post('/api/v1/schedule/view/fix/weight', payload.amount)
+      Vue.http.post('/v1/schedule/view/fix/weight', payload.amount)
         .then(
           (res) => {
             // store.dispatch({
@@ -528,7 +528,7 @@ const actions= {
   GET_CUSTOM_GROUP_DATA_AC ({commit}, payload){
     console.log('payload.amount::' + payload.amount)
     return new Promise((reslove, reject) => {
-      Vue.http.get('/api/v1/joint/list', {
+      Vue.http.get('/v1/joint/list', {
         params: payload.amount
       })
         .then(
@@ -549,7 +549,7 @@ const actions= {
   ADD_CUSTOM_GROUP_DATA_AC ({commit}, payload){
     console.log('payload.amount::' + payload.amount)
     return new Promise((reslove, reject) => {
-      Vue.http.post('/api/v1/joint/create', payload.amount)
+      Vue.http.post('/v1/joint/create', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -568,7 +568,7 @@ const actions= {
   DEL_CUSTOM_GROUP_DATA_AC ({commit}, payload){
     console.log('payload.amount::' + payload.amount)
     return new Promise((reslove, reject) => {
-      Vue.http.post('/api/v1/joint/delete', payload.amount)
+      Vue.http.post('/v1/joint/delete', payload.amount)
         .then(
           (res) => {
             store.dispatch({
@@ -587,7 +587,7 @@ const actions= {
   UPDATE_CUSTOM_GROUP_DATA_AC ({commit}, payload){
     console.log('payload.amount::' + payload.amount)
     return new Promise((reslove, reject) => {
-      Vue.http.post('/api/v1/joint/modify/status', payload.amount)
+      Vue.http.post('/v1/joint/modify/status', payload.amount)
         .then(
           (res) => {
             store.dispatch({

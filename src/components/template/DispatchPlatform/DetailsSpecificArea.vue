@@ -19,14 +19,52 @@
                   <td v-if="index==0" :rowspan="value.schedule_view_group.length">
                     {{item.view}}
                   </td>
-                  <td class="self">自有</td>
+                  <td>
+                    <span v-show="val.status=='enable'" class="font-success">自有</span>
+                    <span v-show="val.status=='disable'" class="font-danger">自有</span>
+                  </td>
                   <td>
                     {{val.group_name}}
                   </td>
                   <td>
-                    <el-input type="number" v-model="selfWeight" :value="val.weight"></el-input>
+                    <div
+                      v-show="val.status=='disable'"
+                    >
+                      <el-input type="number" disabled="true" v-model="selfWeight" :value="val.weight"></el-input>
+                    </div>
+                    <div v-show="val.status=='enable'">
+                      <el-input type="number" v-model="selfWeight" :value="val.weight"></el-input>
+                    </div>
                   </td>
                   <td class="button-box">
+
+                    <button
+                      :data-schedule-name="val.schedule_name"
+                      :data-domain-name="val.domain_name"
+                      :data-view="val.view"
+                      :data-comment="val.comment"
+                      :data-group-name="val.group_name"
+                      :data-weight="selfWeight"
+                      @click="handleUpdateSelfWeight"
+                      v-show="val.status=='enable'"
+                    >
+                      修改权重
+                    </button>
+                    <button
+                      v-show="val.status=='disable'"
+                      disabled="true"
+                      :data-schedule-name="val.schedule_name"
+                      :data-domain-name="val.domain_name"
+                      :data-view="val.view"
+                      :data-comment="val.comment"
+                      :data-group-name="val.group_name"
+                      :data-weight="selfWeight"
+                      @click="handleUpdateSelfWeight"
+
+                    >
+                      修改权重
+                    </button>
+
                     <button
                       :data-schedule-name="val.schedule_name"
                       :data-domain-name="val.domain_name"
@@ -38,6 +76,7 @@
                     >
                       删除
                     </button>
+
                     <template v-if="val.status=='enable'">
                       <button
                         :data-schedule-name="val.schedule_name"
@@ -64,17 +103,7 @@
                         上线
                       </button>
                     </template>
-                    <button
-                      :data-schedule-name="val.schedule_name"
-                      :data-domain-name="val.domain_name"
-                      :data-view="val.view"
-                      :data-comment="val.comment"
-                      :data-group-name="val.group_name"
-                      :data-weight="selfWeight"
-                      @click="handleUpdateSelfWeight"
-                    >
-                      修改权重
-                    </button>
+
                   </td>
                 </tr>
               </template>
@@ -83,7 +112,7 @@
                   <td v-if="index==0"  :rowspan="value.borrowed_view_group.length">
                     {{item.view}}
                   </td>
-                  <td class="borrow">{{value.big_view}}（借用）</td>
+                  <td class="font-warning">{{value.big_view}}（借用）</td>
                   <td>
                     {{val.group_name}}
                   </td>
@@ -92,18 +121,22 @@
                     <el-input type="number" v-model="borrowedWeight" :value="value.big_view_sum"></el-input>
                   </td>
                   <td class="button-box" v-if="index==0" :rowspan="value.borrowed_view_group.length">
+                    <!-- 删除功能取消 -->
+                    <!--
+                      <button
+                        :data-schedule-name="val.schedule_name"
+                        :data-domain-name="val.domain_name"
+                        :data-view="val.view"
+                        :data-view-type="val.view_type"
+                        :data-comment="val.comment"
+                        :data-group-name="val.group_name"
+                        @click="handleDelete"
+                      >
+                        删除
+                      </button>
 
-                    <button
-                      :data-schedule-name="val.schedule_name"
-                      :data-domain-name="val.domain_name"
-                      :data-view="val.view"
-                      :data-view-type="val.view_type"
-                      :data-comment="val.comment"
-                      :data-group-name="val.group_name"
-                      @click="handleDelete"
-                    >
-                      删除
-                    </button>
+                    -->
+
 
                     <button
                     :data-schedule-name="val.schedule_name"
@@ -377,12 +410,12 @@
 
         td{
 
-          &.borrow{
-            color:#eea236;
-          }
-          &.self{
-            color: #23d160;
-          }
+          /*&.borrow{*/
+            /*color:#eea236;*/
+          /*}*/
+          /*&.self{*/
+            /*color: #23d160;*/
+          /*}*/
         }
       }
 
